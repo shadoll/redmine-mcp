@@ -9,6 +9,8 @@ Environment variables:
   MCP_HOST        — bind host for HTTP transport (default: 0.0.0.0)
   MCP_PORT        — bind port for HTTP transport (default: 8000)
   MCP_AUTH_TOKEN  — Bearer token for HTTP transport auth (optional)
+  MCP_ALLOWED_HOSTS — Comma-separated extra allowed Host headers, e.g. redmine.mcp.example.com
+                      (FastMCP only allows localhost by default — required when behind a reverse proxy)
 """
 
 import os
@@ -23,6 +25,11 @@ if __name__ == "__main__":
         host = os.environ.get("MCP_HOST", "0.0.0.0")
         port = int(os.environ.get("MCP_PORT", "8000"))
         token = os.environ.get("MCP_AUTH_TOKEN", "")
+
+        allowed_hosts = os.environ.get("MCP_ALLOWED_HOSTS", "")
+        if allowed_hosts:
+            for h in (h.strip() for h in allowed_hosts.split(",")):
+                mcp.settings.transport_security.allowed_hosts.append(h)
 
         app = mcp.streamable_http_app()
 

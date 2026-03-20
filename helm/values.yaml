@@ -15,6 +15,9 @@ redmine:
 auth:
   # Bearer token for HTTP transport (leave empty to disable auth)
   token: ""
+  # Comma-separated list of additional allowed Host headers (e.g. your public domain)
+  # FastMCP allows only localhost by default — set this when running behind a reverse proxy
+  allowedHosts: ""
 
 service:
   type: ClusterIP

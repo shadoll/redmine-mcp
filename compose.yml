@@ -10,4 +10,5 @@ services:
       MCP_HOST: 0.0.0.0
       MCP_PORT: 8000
       MCP_AUTH_TOKEN: ${MCP_AUTH_TOKEN:-}
+      MCP_ALLOWED_HOSTS: ${MCP_ALLOWED_HOSTS:-}
     restart: on-failure
