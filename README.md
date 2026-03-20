@@ -4,8 +4,6 @@ Exposes Redmine REST API as tools for Claude Code via MCP (Model Context Protoco
 
 ## Available tools
 
-| Tool | Description |
-|------|-------------|
 **Issues**
 
 | Tool | Description |
@@ -85,6 +83,74 @@ claude mcp add --scope user --transport http redmine http://localhost:8765/mcp
 Verify it was added:
 ```bash
 claude mcp list
+```
+
+## Kubernetes / k3s
+
+### Quick start
+
+**1. Install Helm** (if not already installed):
+```bash
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+```
+
+**2. Install the chart:**
+```bash
+helm install redmine-mcp ./helm \
+  --set redmine.url=https://your.redmine.com \
+  --set redmine.apiKey=your_api_key
+```
+
+**3. Register with Claude Code** (using port-forward):
+```bash
+kubectl port-forward svc/redmine-mcp 8000:8000
+claude mcp add --scope user --transport http redmine http://localhost:8000/mcp
+```
+
+---
+
+### Expose via NodePort (access without port-forward)
+
+```bash
+helm install redmine-mcp ./helm \
+  --set redmine.url=https://your.redmine.com \
+  --set redmine.apiKey=your_api_key \
+  --set service.type=NodePort
+```
+
+Then find the assigned port:
+```bash
+kubectl get svc redmine-mcp
+```
+
+Register:
+```bash
+claude mcp add --scope user --transport http redmine http://<node-ip>:<node-port>/mcp
+```
+
+---
+
+### Use an existing Kubernetes Secret
+
+```bash
+kubectl create secret generic redmine-credentials \
+  --from-literal=REDMINE_URL=https://your.redmine.com \
+  --from-literal=REDMINE_API_KEY=your_api_key
+
+helm install redmine-mcp ./helm \
+  --set redmine.existingSecret=redmine-credentials
+```
+
+---
+
+### Upgrade / uninstall
+
+```bash
+# Upgrade
+helm upgrade redmine-mcp ./helm --reuse-values
+
+# Uninstall
+helm uninstall redmine-mcp
 ```
 
 ## Usage examples
