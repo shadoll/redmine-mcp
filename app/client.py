@@ -24,3 +24,11 @@ def _put(path: str, body: dict) -> dict:
         resp = client.put(url, headers=_headers(), content=json.dumps(body))
         resp.raise_for_status()
         return resp.json() if resp.content else {}
+
+
+def _post(path: str, body: dict) -> dict:
+    url = f"{REDMINE_URL}{path}"
+    with httpx.Client(timeout=15) as client:
+        resp = client.post(url, headers=_headers(), content=json.dumps(body))
+        resp.raise_for_status()
+        return resp.json()

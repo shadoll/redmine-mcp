@@ -1,6 +1,41 @@
 import json
 from ..mcp import mcp
-from ..client import _get, _put
+from ..client import _get, _put, _post
+
+
+@mcp.tool()
+def create_issue(
+    project_id: str,
+    subject: str,
+    description: str = "",
+    assigned_to_id: int = 0,
+    priority_id: int = 0,
+    due_date: str = "",
+) -> str:
+    """
+    Create a new Redmine issue.
+
+    Args:
+        project_id:      Project ID or slug
+        subject:         Issue title
+        description:     Issue description
+        assigned_to_id:  User ID to assign (use get_project_members to find IDs)
+        priority_id:     Priority ID (leave 0 for default)
+        due_date:        Due date in YYYY-MM-DD format
+    """
+    payload: dict = {"project_id": project_id, "subject": subject}
+    if description:
+        payload["description"] = description
+    if assigned_to_id:
+        payload["assigned_to_id"] = assigned_to_id
+    if priority_id:
+        payload["priority_id"] = priority_id
+    if due_date:
+        payload["due_date"] = due_date
+
+    data = _post("/issues.json", {"issue": payload})
+    issue = data["issue"]
+    return json.dumps({"id": issue["id"], "subject": issue["subject"]}, ensure_ascii=False, indent=2)
 
 
 @mcp.tool()

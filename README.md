@@ -6,6 +6,7 @@ Exposes Redmine REST API as tools for Claude Code via MCP (Model Context Protoco
 
 | Tool | Description |
 |------|-------------|
+| `create_issue` | Create a new issue in a project |
 | `get_issue` | Get issue details by ID |
 | `list_issues` | Query issues with filters (project, status, assignee) |
 | `update_issue` | Update title, description, priority, due date |
@@ -64,6 +65,7 @@ claude mcp list
 
 Once registered, just ask Claude naturally in any project:
 
+> "Create a new issue in project api-service: Fix login timeout"
 > "Get issue #1234"
 > "Search for issues related to login bug"
 > "Change status of issue #1234 to In Progress"
