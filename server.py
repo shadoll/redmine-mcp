@@ -33,6 +33,6 @@ if __name__ == "__main__":
         else:
             print("Auth: disabled (MCP_AUTH_TOKEN not set).", flush=True)
 
-        uvicorn.run(app, host=host, port=port)
+        uvicorn.run(app, host=host, port=port, proxy_headers=True, forwarded_allow_ips="*")
     else:
         mcp.run(transport="stdio")
