@@ -5,7 +5,8 @@ REDMINE_API_KEY = os.environ.get("REDMINE_API_KEY", "")
 
 
 def validate():
-    if not REDMINE_URL or not REDMINE_API_KEY:
-        raise RuntimeError(
-            "REDMINE_URL and REDMINE_API_KEY environment variables must be set."
-        )
+    missing = [name for name, val in [("REDMINE_URL", REDMINE_URL), ("REDMINE_API_KEY", REDMINE_API_KEY)] if not val]
+    if missing:
+        print(f"ERROR: Required environment variable(s) not set: {', '.join(missing)}")
+        print("Set them in your .env file or pass via -e flags. Exiting.")
+        raise SystemExit(0)
