@@ -66,6 +66,8 @@ REDMINE_API_KEY=your_personal_api_key_here
 
 ### 3. Run the container
 
+The image is published automatically to `ghcr.io/shadoll/redmine-mcp:latest` on every push to `main`.
+
 ```bash
 docker compose up -d
 # or with podman:

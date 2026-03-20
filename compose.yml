@@ -1,8 +1,6 @@
 services:
   redmine-mcp:
-    build:
-      context: .
-      dockerfile: Containerfile
+    image: ghcr.io/shadoll/redmine-mcp:latest
     ports:
       - "8765:8000"
     environment:
