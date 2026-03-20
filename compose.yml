@@ -1,0 +1,14 @@
+services:
+  redmine-mcp:
+    build:
+      context: .
+      dockerfile: Containerfile
+    ports:
+      - "8765:8000"
+    environment:
+      REDMINE_URL: ${REDMINE_URL}
+      REDMINE_API_KEY: ${REDMINE_API_KEY}
+      MCP_TRANSPORT: http
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: 8000
+    restart: unless-stopped
