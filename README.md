@@ -6,17 +6,41 @@ Exposes Redmine REST API as tools for Claude Code via MCP (Model Context Protoco
 
 | Tool | Description |
 |------|-------------|
-| `create_issue` | Create a new issue in a project |
+**Issues**
+
+| Tool | Description |
+|------|-------------|
+| `create_issue` | Create a new issue (supports subtask, watchers, relations) |
 | `get_issue` | Get issue details by ID |
 | `list_issues` | Query issues with filters (project, status, assignee) |
-| `update_issue` | Update title, description, priority, due date |
+| `update_issue` | Update title, description, priority, due date, subtask, watchers, relations |
 | `update_issue_status` | Change issue status |
 | `update_issue_progress` | Set % done (0–100) |
+
+**Comments & members**
+
+| Tool | Description |
+|------|-------------|
 | `get_issue_comments` | Get all comments and field changes |
 | `add_issue_comment` | Post a new comment |
 | `assign_issue` | Assign issue to a user |
 | `get_project_members` | List project members with user IDs |
 | `get_issue_statuses` | List all available statuses (use to find status IDs) |
+
+**Relations & watchers**
+
+| Tool | Description |
+|------|-------------|
+| `get_issue_relations` | List all relations for an issue |
+| `add_issue_relation` | Add a relation between two issues |
+| `remove_issue_relation` | Remove a relation by relation ID |
+| `add_watcher` | Add a watcher to an issue |
+| `remove_watcher` | Remove a watcher from an issue |
+
+**Search**
+
+| Tool | Description |
+|------|-------------|
 | `search` | Search by keyword across issues, wiki, news, documents, and more |
 
 ## Setup

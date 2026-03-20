@@ -32,3 +32,10 @@ def _post(path: str, body: dict) -> dict:
         resp = client.post(url, headers=_headers(), content=json.dumps(body))
         resp.raise_for_status()
         return resp.json()
+
+
+def _delete(path: str) -> None:
+    url = f"{REDMINE_URL}{path}"
+    with httpx.Client(timeout=15) as client:
+        resp = client.delete(url, headers=_headers())
+        resp.raise_for_status()
