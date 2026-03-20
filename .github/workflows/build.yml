@@ -65,5 +65,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add helm/Chart.yaml
-          git commit -m "chore: chart ${{ steps.chart.outputs.version }}, appVersion ${{ steps.tag.outputs.value }} [skip ci]"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit; skipping commit and push."
+          else
+            git commit -m "chore: chart ${{ steps.chart.outputs.version }}, appVersion ${{ steps.tag.outputs.value }} [skip ci]"
+            git push
+          fi
