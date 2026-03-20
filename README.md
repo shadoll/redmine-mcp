@@ -60,6 +60,9 @@ Edit `.env`:
 ```
 REDMINE_URL=https://your.redmine.com
 REDMINE_API_KEY=your_personal_api_key_here
+
+# Optional: enable Bearer token auth for remote access
+# MCP_AUTH_TOKEN=your_secret_token_here
 ```
 
 ### 3. Run the container
@@ -77,7 +80,12 @@ The server will be available at `http://localhost:8765`.
 ### 4. Register with Claude Code
 
 ```bash
+# Without auth:
 claude mcp add --scope user --transport http redmine http://localhost:8765/mcp
+
+# With Bearer token auth:
+claude mcp add --scope user --transport http redmine http://localhost:8765/mcp \
+  --header "Authorization: Bearer your_secret_token_here"
 ```
 
 Verify it was added:
@@ -98,7 +106,8 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 ```bash
 helm install redmine-mcp ./helm \
   --set redmine.url=https://your.redmine.com \
-  --set redmine.apiKey=your_api_key
+  --set redmine.apiKey=your_api_key \
+  --set auth.token=your_secret_token_here  # optional
 ```
 
 **3. Register with Claude Code** (using port-forward):

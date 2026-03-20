@@ -12,6 +12,10 @@ redmine:
   # -- Or reference an existing Secret with keys REDMINE_URL and REDMINE_API_KEY
   existingSecret: ""
 
+auth:
+  # Bearer token for HTTP transport (leave empty to disable auth)
+  token: ""
+
 service:
   type: ClusterIP
   port: 8000
