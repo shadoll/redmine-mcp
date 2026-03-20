@@ -1,6 +1,3 @@
-def main():
-    print("Hello from redmine-mcp!")
-
-
-if __name__ == "__main__":
-    main()
+#!/usr/bin/env python3
+import runpy
+runpy.run_path("server.py", run_name="__main__")

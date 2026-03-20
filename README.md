@@ -7,15 +7,16 @@ Exposes Redmine REST API as tools for Claude Code via MCP (Model Context Protoco
 | Tool | Description |
 |------|-------------|
 | `get_issue` | Get issue details by ID |
-| `get_issue_statuses` | List all available statuses (use to find status IDs) |
+| `list_issues` | Query issues with filters (project, status, assignee) |
+| `update_issue` | Update title, description, priority, due date |
 | `update_issue_status` | Change issue status |
 | `update_issue_progress` | Set % done (0–100) |
 | `get_issue_comments` | Get all comments and field changes |
 | `add_issue_comment` | Post a new comment |
 | `assign_issue` | Assign issue to a user |
 | `get_project_members` | List project members with user IDs |
-| `list_issues` | Query issues with filters (project, status, assignee) |
-| `update_issue` | Update title, description, priority, due date |
+| `get_issue_statuses` | List all available statuses (use to find status IDs) |
+| `search` | Search by keyword across issues, wiki, news, documents, and more |
 
 ## Setup
 
@@ -64,6 +65,7 @@ claude mcp list
 Once registered, just ask Claude naturally in any project:
 
 > "Get issue #1234"
+> "Search for issues related to login bug"
 > "Change status of issue #1234 to In Progress"
 > "Add a comment to issue #1234: deployment done"
 > "Who is assigned to issue #1234?"
