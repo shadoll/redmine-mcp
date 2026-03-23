@@ -71,9 +71,9 @@ def get_issue(issue_id: int) -> str:
     """
     Get a Redmine issue by ID.
     Returns full issue details: title, description, status, priority,
-    assignee, progress, dates, custom fields.
+    assignee, progress, dates, custom fields, watchers.
     """
-    data = _get(f"/issues/{issue_id}.json")
+    data = _get(f"/issues/{issue_id}.json", params={"include": "watchers"})
     return json.dumps(data["issue"], ensure_ascii=False, indent=2)
 
 
