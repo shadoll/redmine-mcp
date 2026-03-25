@@ -2,5 +2,5 @@ apiVersion: v2
 name: redmine-mcp
 description: Redmine MCP Server — exposes Redmine REST API as MCP tools for Claude Code
 type: application
-version: 0.1.9
-appVersion: "sha-3f67f7b"
+version: 0.1.10
+appVersion: "sha-b60bf84"
