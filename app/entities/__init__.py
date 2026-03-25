@@ -1,3 +1,3 @@
-from . import issues, comments, members, statuses, search, relations
+from . import issues, comments, members, statuses, search, relations, users
 
-__all__ = ["issues", "comments", "members", "statuses", "search", "relations"]
+__all__ = ["issues", "comments", "members", "statuses", "search", "relations", "users"]
