@@ -1,6 +1,6 @@
 import json
 from ..mcp import mcp
-from ..client import _get, _put
+from ..client import _get, _put, _delete
 
 
 @mcp.tool()
@@ -120,3 +120,15 @@ def add_issue_comment(issue_id: int, comment: str) -> str:
     """
     _put(f"/issues/{issue_id}.json", {"issue": {"notes": comment}})
     return f"Comment added to issue #{issue_id}."
+
+
+@mcp.tool()
+def delete_issue_comment(journal_id: int) -> str:
+    """
+    Delete a comment (journal note) from a Redmine issue.
+
+    Args:
+        journal_id: The journal entry ID (obtainable from get_issue_comments)
+    """
+    _delete(f"/journals/{journal_id}.json")
+    return f"Comment #{journal_id} deleted."
